@@ -1,0 +1,161 @@
+scrape_configs:
+  - job_name: nodes
+    scrape_interval: 10s
+    static_configs:
+    - targets: ['10.128.0.5:9100']
+      labels:
+        instance: 'dev'
+    - targets: ['10.128.0.18:9100']
+      labels:
+        instance: 'chatwoot-elk'
+    - targets: ['10.128.0.23:9100']
+      labels:
+        instance: 'prod-1'
+    - targets: ['10.128.0.31:9100']
+      labels:
+        instance: 'prod-2'
+    - targets: ['10.128.0.3:9100']
+      labels:
+        instance: 'redis'
+    - targets: ['10.128.0.12:9100']
+      labels:
+        instance: 'scrapper-1'
+    - targets: ['10.128.0.6:9100']
+      labels:
+        instance: 'scrapper-2'
+    - targets: ['10.128.0.21:9100']
+      labels:
+        instance: 'scrapper-3'
+    - targets: ['10.128.0.41:9100']
+      labels:
+        instance: 'external-scrappers'
+    - targets: ['10.128.0.25:9100']
+      labels:
+        instance: 'services'
+    - targets: ['10.128.0.9:9100']
+      labels:
+        instance: 'autopilot'
+
+  - job_name: vps
+    scrape_interval: 10s
+    static_configs:
+    - targets: ['10.128.0.6:8000']
+      labels:
+        service: 'phrases_positions'
+    - targets: ['10.128.0.6:8002']
+      labels:
+        service: 'reports_prod'
+    - targets: ['10.128.0.6:8003']
+      labels:
+        service: 'phrases_positions_full'
+    - targets: ['10.128.0.21:8001']
+      labels:
+        service: 'stat_words'
+    - targets: ['10.128.0.12:8001']
+      labels:
+        service: 'ad_phrases_presets'
+    - targets: ['10.128.0.41:8000']
+      labels:
+        service: 'positions'
+    - targets: ['10.128.0.41:8002']
+      labels:
+        service: 'remainders'
+    - targets: ['10.128.0.41:8003']
+      labels:
+        service: 'sellers'
+    - targets: ['10.128.0.12:8000']
+      labels:
+        service: 'ad_stats'
+    - targets: ['10.128.0.25:8001']
+      labels:
+        service: 'wb_api_service'
+    - targets: ['10.128.0.25:8000']
+      labels:
+        service: 'wb_service'
+
+  - job_name: app-metrics
+    scrape_interval: 10s
+    metrics_path: '/prometheus/metrics'
+    static_configs:
+    - targets: ['10.128.0.31']
+      labels:
+        instance: prod-2
+    - targets: ['10.128.0.23']
+      labels:
+        instance: prod-1
+
+  - job_name: functions
+    scrape_interval: 1s
+    static_configs:
+    - targets: ['10.128.0.5:9091']
+      labels:
+        functions: 'all'
+
+  - job_name: proxy
+    scrape_interval: 1m
+    static_configs:
+    - targets: ['10.128.0.18:9091']
+      labels:
+        proxy: 'scrappers'
+
+  - job_name: blackbox
+    metrics_path: /probe
+    params:
+      module:
+        - http_2xx
+    static_configs:
+      - targets:
+        - https://e-comet.io
+        - https://app.e-comet.io
+        - https://chat.e-comet.io
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 10.128.0.18:9115
+
+  - job_name: docker
+    scrape_interval: 10s
+    static_configs:
+    - targets: ['10.128.0.5:8081']
+      labels:
+        instance: dev
+    - targets: ['10.128.0.18:8080']
+      labels:
+        instance: chatwoot-elk
+    - targets: ['10.128.0.31:8081']
+      labels:
+        instance: prod-2
+    - targets: ['10.128.0.23:8081']
+      labels:
+        instance: prod-1
+    - targets: ['10.128.0.12:8081']
+      labels:
+        instance: scrappers-1
+    - targets: ['10.128.0.6:8081']
+      labels:
+        instance: scrappers-2
+    - targets: ['10.128.0.21:8081']
+      labels:
+        instance: scrappers-3
+    - targets: ['10.128.0.41:8081']
+      labels:
+        instance: external-scrappers
+    - targets: ['10.128.0.25:8081']
+      labels:
+        instance: services
+    - targets: ['10.128.0.9:8081']
+      labels:
+        instance: autopilot
+
+  - job_name: keykloak
+    scrape_interval: 10s
+    static_configs:
+    - targets: ['10.128.0.31:8080']
+      labels:
+        instance: prod-2
+    - targets: ['10.128.0.23:8080']
+      labels:
+        instance: prod-1
