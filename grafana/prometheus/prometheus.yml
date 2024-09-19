@@ -38,6 +38,9 @@ scrape_configs:
     - targets: ['10.128.0.38:9100']
       labels:
         instance: 'additional-ch'
+    - targets: ['158.101.172.154:9100']
+      labels:
+        instance: 'clickhuse-dev'
 
   - job_name: vps
     scrape_interval: 10s
