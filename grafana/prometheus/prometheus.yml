@@ -35,6 +35,9 @@ scrape_configs:
     - targets: ['10.128.0.9:9100']
       labels:
         instance: 'autopilot'
+    - targets: ['10.128.0.38:9100']
+      labels:
+        instance: 'additional-ch'
 
   - job_name: vps
     scrape_interval: 10s
