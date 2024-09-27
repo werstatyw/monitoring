@@ -164,6 +164,10 @@ scrape_configs:
     - targets: ['10.127.0.26:8081']
       labels:
         instance: services-dev
+    - targets: ['10.127.0.8:8081']
+      labels:
+        instance: scrapers-dev
+
 
   - job_name: keykloak
     scrape_interval: 10s
