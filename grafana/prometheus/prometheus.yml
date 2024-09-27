@@ -41,6 +41,12 @@ scrape_configs:
     - targets: ['158.101.172.154:9100']
       labels:
         instance: 'clickhuse-dev'
+    - targets: ['10.127.0.26:9100']
+      labels:
+        instance: 'services-dev'
+    - targets: ['10.127.0.8:9100']
+      labels:
+        instance: 'scrapers-dev'
 
   - job_name: vps
     scrape_interval: 10s
@@ -155,6 +161,9 @@ scrape_configs:
     - targets: ['10.128.0.9:8081']
       labels:
         instance: autopilot
+    - targets: ['10.127.0.26:8081']
+      labels:
+        instance: services-dev
 
   - job_name: keykloak
     scrape_interval: 10s
