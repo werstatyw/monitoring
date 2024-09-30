@@ -4,16 +4,15 @@ global:
   # A short evaluation_interval will check alerting rules very often.
   # It can be costly if you run Prometheus with 100+ alerts.
   evaluation_interval: 20s
-  ...
 
-rule_files:
-  - 'alerts/*.yml'
+# rule_files:
+#   - 'alerts/*.yml'
 
-# alerting:
-#   alertmanagers:
-#    - static_configs:
-#      - targets:
-#         - localhost:9093
+alerting:
+  alertmanagers:
+   - static_configs:
+     - targets:
+        - localhost:9093
 
 scrape_configs:
   - job_name: nodes
