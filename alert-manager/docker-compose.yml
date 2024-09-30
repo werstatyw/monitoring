@@ -3,7 +3,7 @@ version: '3'
 services:
   alert-manager:
       image: prom/alertmanager
-      volumes:
+      #volumes:
       #  - "./alertmanager.yml:/alertmanager/alertmanager.yml"
       # networks:
       #   - localprom
