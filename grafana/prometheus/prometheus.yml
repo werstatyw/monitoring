@@ -120,6 +120,7 @@ scrape_configs:
         - https://e-comet.io
         - https://app.e-comet.io
         - https://chat.e-comet.io
+        - http://10.128.0.5
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
