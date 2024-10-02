@@ -5,10 +5,10 @@ groups:
   rules:
 
     - alert: items<1000
-          expr: '(items{service="feedbacks_scrapper"}[6h])<1000'
-          for: 1h
-          labels:
-            severity: warning
-          annotations:
-            summary: feedback scrapers is less < 1000 (instance {{ $labels.instance }})
-            description: "feedback scrapers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      expr: '(items{service="feedbacks_scrapper"}[6h])<1000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: feedback scrapers is less < 1000 (instance {{ $labels.instance }})
+        description: "feedback scrapers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
