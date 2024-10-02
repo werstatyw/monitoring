@@ -1,6 +1,6 @@
 groups:
 
-- name: prometheus
+- name: scraperts
 
   rules:
 
@@ -12,3 +12,57 @@ groups:
       annotations:
         summary: feedback scrapers is less < 1000 (instance {{ $labels.instance }})
         description: "feedback scrapers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: items<1000
+      expr: 'last_over_time(items{service="accounts_products"}[10m]) < 1000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: accounts_products is less < 1000 (instance {{ $labels.instance }})
+        description: "accounts_products is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: items<1000
+      expr: 'last_over_time(items{service="adverts"}[10m]) < 1000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: adverts is less < 1000 (instance {{ $labels.instance }})
+        description: "adverts is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: items<1000
+      expr: 'last_over_time(items{service="auctions_0"}[10m]) < 1000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: auctions_0 is less < 1000 (instance {{ $labels.instance }})
+        description: "auctions_0 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: items<1000
+      expr: 'last_over_time(items{service="auctions_1"}[10m]) < 1000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: auctions_1 is less < 1000 (instance {{ $labels.instance }})
+        description: "auctions_1 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: items<1000
+      expr: 'last_over_time(items{service="autopilot"}[10m]) < 1000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: autopilot is less < 1000 (instance {{ $labels.instance }})
+        description: "autopilot is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: items<1000
+      expr: 'last_over_time(items{service="balancesr"}[10m]) < 1000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: balances is less < 1000 (instance {{ $labels.instance }})
+        description: "balances is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
