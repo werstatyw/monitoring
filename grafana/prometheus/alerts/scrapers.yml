@@ -1,5 +1,4 @@
-
-#(items{service="feedbacks_scrapper"}[6h])
+groups:
 
 - name: prometheus
 
