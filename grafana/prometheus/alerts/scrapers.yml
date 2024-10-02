@@ -1,0 +1,15 @@
+
+#(items{service="feedbacks_scrapper"}[6h])
+
+- name: prometheus
+
+  rules:
+
+    - alert: items<1000
+          expr: '(items{service="feedbacks_scrapper"}[6h])'
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            summary: feedback scrapers is less < 1000 (instance {{ $labels.instance }})
+            description: "feedback scrapers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
