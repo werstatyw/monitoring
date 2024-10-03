@@ -1,0 +1,131 @@
+groups:
+
+- name: scrapers_mem_usage
+
+  rules:
+
+    - alert: items<1000
+      expr: 'last_over_time(items{service="feedbacks_scrapper"}[10m]) < 1000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: feedback scrapers is less < 1000 (instance {{ $labels.instance }})
+        description: "feedback scrapers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: accounts_products items<1300
+      expr: 'last_over_time(items{service="accounts_products"}[10m]) < 1300'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: accounts_products is less < 1300 (instance {{ $labels.instance }})
+        description: "accounts_products is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: adverts items<1000
+      expr: 'last_over_time(items{service="adverts"}[10m]) < 1000'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: adverts is less < 1000 (instance {{ $labels.instance }})
+        description: "adverts is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: auctions_0 items<100000
+      expr: 'last_over_time(items{service="auctions_0"}[10m]) < 100000'
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: auctions_0 is less < 100000 (instance {{ $labels.instance }})
+        description: "auctions_0 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: auctions_1 items<100000
+      expr: 'last_over_time(items{service="auctions_1"}[10m]) < 100000'
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: auctions_1 is less < 1000 (instance {{ $labels.instance }})
+        description: "auctions_1 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: autopilot items<1000 for 24h
+      expr: 'last_over_time(items{service="autopilot"}[10m]) < 1000'
+      for: 24h
+      labels:
+        severity: warning
+      annotations:
+        summary: autopilot is less < 1000 (instance {{ $labels.instance }})
+        description: "autopilot is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: balances items<30
+      expr: 'last_over_time(items{service="balances"}[10m]) < 30'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: balances is less < 30 (instance {{ $labels.instance }})
+        description: "balances is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: bidder items<30
+      expr: 'last_over_time(items{service="bidder"}[10m]) < 300'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: bidder is less < 30 (instance {{ $labels.instance }})
+        description: "bidder is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: budgets items<100
+      expr: 'last_over_time(items{service="budgets"}[10m]) < 100'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: budgets is less < 30 (instance {{ $labels.instance }})
+        description: "budgets is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  
+    - alert: campaigns items< 100
+      expr: 'last_over_time(items{service="campaigns"}[10m]) < 100'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: campaigns is less < 100 (instance {{ $labels.instance }})
+        description: "campaigns is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: campaigns_expenses items<10000
+      expr: 'last_over_time(items{service="campaigns_expenses"}[10m]) < 10000'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: campaigns_expenses is less < 10000 (instance {{ $labels.instance }})
+        description: "campaigns_expenses is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: feedbacks_uploader items<1
+      expr: 'last_over_time(items{service="feedbacks_uploader"}[10m]) < 1'
+      for: 2h
+      labels:
+        severity: warning
+      annotations:
+        summary: feedbacks_uploader is less < 1 (instance {{ $labels.instance }})
+        description: "feedbacks_uploader is less < 1\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: orders_scrapper items<10000
+      expr: 'last_over_time(items{service="orders_scrapper"}[10m]) < 10000'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: orders_scrapper is less < 10000 (instance {{ $labels.instance }})
+        description: "orders_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: stocks_scrapper items<10000
+      expr: 'last_over_time(items{service="stocks_scrapper"}[10m]) < 10000'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: stocks_scrapper is less < 10000 (instance {{ $labels.instance }})
+        description: "stocks_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
