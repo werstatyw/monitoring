@@ -13,129 +13,221 @@ groups:
         summary: there's an errors in feedbacks_scrapper (instance {{ $labels.instance }})
         description: "there's an errors in feedbacks_scrapper \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: accounts_products items<1300
-      expr: 'last_over_time(items{service="accounts_products"}[10m]) < 1300'
+    - alert: accounts_products errors >1
+      expr: 'increase(errors{job!="", service=~"accounts_products"}[1m]) > 1'
       for: 1h
       labels:
         severity: warning
       annotations:
-        summary: accounts_products is less < 1300 (instance {{ $labels.instance }})
-        description: "accounts_products is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: accounts_products has errors (instance {{ $labels.instance }})
+        description: "accounts_products has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: adverts items<1000
-      expr: 'last_over_time(items{service="adverts"}[10m]) < 1000'
+    - alert: adverts errors >1
+      expr: 'increase(errors{job!="", service=~"adverts"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: adverts is less < 1000 (instance {{ $labels.instance }})
-        description: "adverts is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: adverts has errors < 1000 (instance {{ $labels.instance }})
+        description: "adverts has errors < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: auctions_0 items<100000
-      expr: 'last_over_time(items{service="auctions_0"}[10m]) < 100000'
+    - alert: auctions_0 errors >1
+      expr: 'increase(errors{job!="", service=~"auctions_0"}[1m]) > 1'
       for: 15m
       labels:
         severity: warning
       annotations:
-        summary: auctions_0 is less < 100000 (instance {{ $labels.instance }})
-        description: "auctions_0 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: auctions_0 has errors(instance {{ $labels.instance }})
+        description: "auctions_0 has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: auctions_1 items<100000
-      expr: 'last_over_time(items{service="auctions_1"}[10m]) < 100000'
+    - alert: auctions_1 errors >1
+      expr: 'increase(errors{job!="", service=~"auctions_1 "}[1m]) > 1'
       for: 1h
       labels:
         severity: warning
       annotations:
-        summary: auctions_1 is less < 1000 (instance {{ $labels.instance }})
-        description: "auctions_1 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: auctions_1 has errors (instance {{ $labels.instance }})
+        description: "auctions_1 has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: autopilot items<1000 for 24h
-      expr: 'last_over_time(items{service="autopilot"}[10m]) < 1000'
+    - alert: autopilot errors >1
+      expr: 'increase(errors{job!="", service=~"autopilot"}[1m]) > 1'
       for: 24h
       labels:
         severity: warning
       annotations:
-        summary: autopilot is less < 1000 (instance {{ $labels.instance }})
-        description: "autopilot is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: autopilot has errors < 1000 (instance {{ $labels.instance }})
+        description: "autopilot has errors < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: balances items<30
-      expr: 'last_over_time(items{service="balances"}[10m]) < 30'
+    - alert: balances items errors >1
+      expr: 'increase(errors{job!="", service=~"balances"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: balances is less < 30 (instance {{ $labels.instance }})
-        description: "balances is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: balances has errors (instance {{ $labels.instance }})
+        description: "balances has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: bidder items<30
-      expr: 'last_over_time(items{service="bidder"}[10m]) < 300'
+    - alert: bidder items errors >1
+      expr: 'increase(errors{job!="", service=~"bidder"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: bidder is less < 30 (instance {{ $labels.instance }})
-        description: "bidder is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: bidder has errors (instance {{ $labels.instance }})
+        description: "bidder has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: budgets items<100
-      expr: 'last_over_time(items{service="budgets"}[10m]) < 100'
+    - alert: budgets items errors >1
+      expr: 'increase(errors{job!="", service=~"budgets"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: budgets is less < 30 (instance {{ $labels.instance }})
-        description: "budgets is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: budgets has errors(instance {{ $labels.instance }})
+        description: "budgets has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
   
-    - alert: campaigns items< 100
-      expr: 'last_over_time(items{service="campaigns"}[10m]) < 100'
+    - alert: campaigns errors >1
+      expr: 'increase(errors{job!="", service=~"campaigns"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: campaigns is less < 100 (instance {{ $labels.instance }})
-        description: "campaigns is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: campaigns has errors(instance {{ $labels.instance }})
+        description: "campaigns has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: campaigns_expenses items<10000
-      expr: 'last_over_time(items{service="campaigns_expenses"}[10m]) < 10000'
+    - alert: campaigns_expenses errors >1
+      expr: 'increase(errors{job!="", service="campaigns_expenses"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: campaigns_expenses is less < 10000 (instance {{ $labels.instance }})
-        description: "campaigns_expenses is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: campaigns_expenses has errors(instance {{ $labels.instance }})
+        description: "campaigns_expenses has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: feedbacks_uploader items<1
-      expr: 'last_over_time(items{service="feedbacks_uploader"}[10m]) < 1'
+    - alert: feedbacks_uploader errors >1
+      expr: 'increase(errors{job!="", service="eedbacks_uploader"}[1m]) > 1'
       for: 2h
       labels:
         severity: warning
       annotations:
-        summary: feedbacks_uploader is less < 1 (instance {{ $labels.instance }})
-        description: "feedbacks_uploader is less < 1\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: feedbacks_uploader has errors(instance {{ $labels.instance }})
+        description: "feedbacks_uploader has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: orders_scrapper items<10000
-      expr: 'last_over_time(items{service="orders_scrapper"}[10m]) < 10000'
+    - alert: orders_scrapper errors >1
+      expr: 'increase(errors{job!="", service="autoders_scrapperpilot"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: orders_scrapper is less < 10000 (instance {{ $labels.instance }})
-        description: "orders_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: orders_scrapper has errors(instance {{ $labels.instance }})
+        description: "orders_scrapper has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: stocks_scrapper items<10000
-      expr: 'last_over_time(items{service="stocks_scrapper"}[10m]) < 10000'
+    - alert: stocks_scrapper errors >1
+      expr: 'increase(errors{job!="", service="stocks_scrapper"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: stocks_scrapper is less < 10000 (instance {{ $labels.instance }})
-        description: "stocks_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: stocks_scrapper has errors < 10000 (instance {{ $labels.instance }})
+        description: "stocks_scrapper has errors < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: stat_works errors >1o for a minur
-      expr: 'increase(errors{job!="", service="stat_words"}[1m]) > 10'
+    - alert: stat_works errors errors >1
+      expr: 'increase(errors{job!="", service="stat_works "}[1m]) > 1'
       for: 3h
       labels:
         severity: warning
       annotations:
-        summary: there's an errors in feedbacks_scrapper (instance {{ $labels.instance }})
-        description: "there's an errors in feedbacks_scrapper \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: there's an errors in stat_works (instance {{ $labels.instance }})
+        description: "there's an errors in stat_works\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: add_phrases_presets errors >1
+      expr: 'increase(errors{job="vps", service="add_phrases_presets"}[1m]) > 1'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: add_phrases_presetshas errors < 10000 (instance {{ $labels.instance }})
+        description: "add_phrases_presets has errors < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+
+    - alert: ad_stats's errors >1
+      expr: 'increase(errors{job="vps", service="ad_stats"}[1m]) > 1'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: ad_statshas errors < 1000 (instance {{ $labels.instance }})
+        description: "ad_stats has errors < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: phrases_positons's errors >1
+      expr: 'increase(errors{job="vps", service="phrases_positons"}[1m]) > 1'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: phrases_positons has errors (instance {{ $labels.instance }})
+        description: "phrases_positons has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  
+    - alert: phrases_positons_full's errors >1
+      expr: 'increase(errors{job="vps", service="phrases_positons_full"}[1m]) > 1'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: phrases_positons_full has errors (instance {{ $labels.instance }})
+        description: "phrases_positons_full has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: positions's items errors >1
+      expr: 'increase(errors{job="vps", service="positions"}[1m]) > 1'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: positionshas has errors  (instance {{ $labels.instance }})
+        description: "positions has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: remainders's errors >1
+      expr: 'increase(errors{job="vps", service="remainders"}[1m]) > 1'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: remainders has errors  (instance {{ $labels.instance }})
+        description: "remainders has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: seller's errors >1
+      expr: 'increase(errors{job="vps", service="sellers"}[1m]) > 1'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: sellers has errors (instance {{ $labels.instance }})
+        description: "sellers has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: stat_words's errors >1
+      expr: 'increase(errors{job="vps", service="stat_words"}[1m]) > 1'
+      for: 30min
+      labels:
+        severity: warning
+      annotations:
+        summary: stat_words has errors (instance {{ $labels.instance }})
+        description: "stat_words has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: wb_api_service's errors >1
+      expr: 'increase(errors{job="vps", service="wb_api_service"}[1m]) > 1'
+      for: 30min
+      labels:
+        severity: warning
+      annotations:
+        summary: wb_api_service has errors < 20000 (instance {{ $labels.instance }})
+        description: "wb_api_service has errors < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: wb_service's errors >1
+      expr: 'increase(errors{job="vps", service="wb_service"}[1m]) > 1'
+      for: 24h
+      labels:
+        severity: warning
+      annotations:
+        summary: wb_service has errors (instance {{ $labels.instance }})
+        description: "wb_service has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
 
