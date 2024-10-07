@@ -28,7 +28,7 @@ groups:
       labels:
         severity: warning
       annotations:
-        summary: "adverts is experience memory usage increase (instance {{ $labels.instance }})
+        summary: adverts is experience memory usage increase (instance {{ $labels.instance }})
         description: "adverts is experience memory usage increase\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: auctions_0 items<100000
