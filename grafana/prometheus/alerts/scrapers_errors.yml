@@ -4,14 +4,14 @@ groups:
 
   rules:
 
-    - alert: items<1000
-      expr: 'increase(errors{job!="", service=~"campaigns|feedbacks_scrapper|ad_phrases_presets"}[1m]) > 2'
+    - alert: feedbacks_scrapper errors >1
+      expr: 'increase(errors{job!="", service=~"feedbacks_scrapper"}[1m]) > 1'
       for: 1h
       labels:
         severity: warning
       annotations:
-        summary: feedback scrapers is less < 1000 (instance {{ $labels.instance }})
-        description: "feedback scrapers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: there's an errors in feedbacks_scrapper (instance {{ $labels.instance }})
+        description: "there's an errors in feedbacks_scrapper \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: accounts_products items<1300
       expr: 'last_over_time(items{service="accounts_products"}[10m]) < 1300'
@@ -129,3 +129,13 @@ groups:
       annotations:
         summary: stocks_scrapper is less < 10000 (instance {{ $labels.instance }})
         description: "stocks_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: stat_works errors >1o for a minur
+      expr: 'increase(errors{job!="", service="stat_words"}[1m]) > 10'
+      for: 3h
+      labels:
+        severity: warning
+      annotations:
+        summary: there's an errors in feedbacks_scrapper (instance {{ $labels.instance }})
+        description: "there's an errors in feedbacks_scrapper \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+

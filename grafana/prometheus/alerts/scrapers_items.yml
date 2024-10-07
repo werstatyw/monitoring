@@ -129,3 +129,103 @@ groups:
       annotations:
         summary: stocks_scrapper is less < 10000 (instance {{ $labels.instance }})
         description: "stocks_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: stocks_scrapper items<10000
+      expr: 'last_over_time(items{service="stocks_scrapper"}[10m]) < 10000'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: stocks_scrapper is less < 10000 (instance {{ $labels.instance }})
+        description: "stocks_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: add_phrases_presets items<10000
+      expr: 'last_over_time(items{job="vps", service="add_phrases_presets"}[10m]) < 10000'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: add_phrases_presetsis less < 10000 (instance {{ $labels.instance }})
+        description: "add_phrases_presets is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+
+    - alert: ad_stats's items<1000
+      expr: 'last_over_time(items{job="vps", service="ad_stats"}[10m]) < 1000'
+      for: 30m
+      labels:
+        severity: warning
+      annotations:
+        summary: ad_statsis less < 1000 (instance {{ $labels.instance }})
+        description: "ad_stats is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: phrases_positons's items<1000
+      expr: 'last_over_time(items{job="vps", service="phrases_positons"}[10m]) < 113000'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: phrases_positons is less < 113000 (instance {{ $labels.instance }})
+        description: "phrases_positons is less < 113000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  
+    - alert: phrases_positons_full's items<113000
+      expr: 'last_over_time(items{job="vps", service="phrases_positons_full"}[10m]) < 113000'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: phrases_positons_full is less < 113000 (instance {{ $labels.instance }})
+        description: "phrases_positons_full is less < 113000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: positions's items<13000
+      expr: 'last_over_time(items{job="vps", service="positions"}[10m]) < 13000'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: positionsis less < 13000 (instance {{ $labels.instance }})
+        description: "positions is less < 13000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: remainders's items<113000
+      expr: 'last_over_time(items{job="vps", service="remainders"}[10m]) < 113000'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: remainders is less < 113000 (instance {{ $labels.instance }})
+        description: "remainders is less < 113000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: seller's items<1000
+      expr: 'last_over_time(items{job="vps", service="sellers"}[10m]) < 1000'
+      for: 6h
+      labels:
+        severity: warning
+      annotations:
+        summary: sellers is less < 1000 (instance {{ $labels.instance }})
+        description: "sellers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: stat_words's items<557000
+      expr: 'last_over_time(items{job="vps", service="stat_words"}[10m]) < 557000'
+      for: 30min
+      labels:
+        severity: warning
+      annotations:
+        summary: stat_words is less < 557000 (instance {{ $labels.instance }})
+        description: "stat_words is less < 557000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: wb_api_service's items<20000
+      expr: 'last_over_time(items{job="vps", service="wb_api_service"}[10m]) < 20000'
+      for: 30min
+      labels:
+        severity: warning
+      annotations:
+        summary: wb_api_service is less < 20000 (instance {{ $labels.instance }})
+        description: "wb_api_service is less < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: wb_service's items<20000
+      expr: 'last_over_time(items{job="vps", service="wb_service"}[10m]) < 20000'
+      for: 24h
+      labels:
+        severity: warning
+      annotations:
+        summary: wb_service is less < 20000 (instance {{ $labels.instance }})
+        description: "wb_service is less < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
