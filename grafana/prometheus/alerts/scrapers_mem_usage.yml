@@ -4,7 +4,7 @@ groups:
 
   rules:
 
-    - alert: 
+    - alert: feedback scrapers memory usage increased
       expr: 'increase(memory_usage{service="feedback scrapers", type="vms"}[1m]) > 1'
       for: 1h
       labels:
