@@ -186,7 +186,7 @@ groups:
 
     - alert: stat_words's errors >1
       expr: 'increase(errors{job="vps", service="stat_words"}[1m]) > 1'
-      for: 30min
+      for: 30m
       labels:
         severity: warning
       annotations:
@@ -195,7 +195,7 @@ groups:
 
     - alert: wb_api_service's errors >1
       expr: 'increase(errors{job="vps", service="wb_api_service"}[1m]) > 1'
-      for: 30min
+      for: 30m
       labels:
         severity: warning
       annotations:
