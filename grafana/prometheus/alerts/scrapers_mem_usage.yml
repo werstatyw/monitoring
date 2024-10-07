@@ -1,47 +1,47 @@
 groups:
 
-- name: scrapers_failures
+- name: scrapers_mem_usage
 
   rules:
 
-    - alert: bidder failures<1000
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: 
+      expr: 'increase(memory_usage{service="feedback scrapers", type="vms"}[1m]) > 1'
       for: 1h
       labels:
         severity: warning
       annotations:
-        summary: feedback scrapers is less < 1000 (instance {{ $labels.instance }})
-        description: "feedback scrapers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: feedback scrapers memory usage increased on more than 100% (instance {{ $labels.instance }})
+        description: "feedback scrapers memory usage increased on more than 100%  < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: accounts_products failures<1300
-      expr: 'increase(request_failures{service="accounts_product"}[1m]) < 1300'
+    - alert: accounts_products items<1300
+      expr:  'increase(memory_usage{service="accounts_products", type="vms"}[1m]) > 1'
       for: 1h
       labels:
         severity: warning
       annotations:
-        summary: accounts_products is less < 1300 (instance {{ $labels.instance }})
-        description: "accounts_products is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: accounts_products memory usage increased on more than 100% (instance {{ $labels.instance }})
+        description: "accounts_products memory usage increased on more than 100% \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: adverts failures is increasing
-      expr: 'increase(request_failures{service="adverts"}[1m]) < 1300'
+    - alert: adverts items<1000
+      expr: 'increase(memory_usage{service="adverts", type="vms"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: adverts failures < 1300 (instance {{ $labels.instance }})
-        description: "adverts is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: "adverts is experience memory usage increase (instance {{ $labels.instance }})
+        description: "adverts is experience memory usage increase\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: auctions_0 failures
-      expr: 'increase(request_failures{service="auctions_0"}[1m]) < 1000'
+    - alert: auctions_0 items<100000
+      expr: 'last_over_time(items{service="auctions_0"}[10m]) < 100000'
       for: 15m
       labels:
         severity: warning
       annotations:
-        summary: auctions_0 failures (instance {{ $labels.instance }})
-        description: "auctions_0 failures\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: auctions_0 is less < 100000 (instance {{ $labels.instance }})
+        description: "auctions_0 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: auctions_1 
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: auctions_1 items<100000
+      expr: 'last_over_time(items{service="auctions_1"}[10m]) < 100000'
       for: 1h
       labels:
         severity: warning
@@ -49,8 +49,8 @@ groups:
         summary: auctions_1 is less < 1000 (instance {{ $labels.instance }})
         description: "auctions_1 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: autopilot failures<1000 for 24h
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: autopilot items<1000 for 24h
+      expr: 'last_over_time(items{service="autopilot"}[10m]) < 1000'
       for: 24h
       labels:
         severity: warning
@@ -58,8 +58,8 @@ groups:
         summary: autopilot is less < 1000 (instance {{ $labels.instance }})
         description: "autopilot is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: balances failures<30
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: balances items<30
+      expr: 'last_over_time(items{service="balances"}[10m]) < 30'
       for: 30m
       labels:
         severity: warning
@@ -67,8 +67,8 @@ groups:
         summary: balances is less < 30 (instance {{ $labels.instance }})
         description: "balances is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: bidder failures<30
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: bidder items<30
+      expr: 'last_over_time(items{service="bidder"}[10m]) < 300'
       for: 30m
       labels:
         severity: warning
@@ -76,8 +76,8 @@ groups:
         summary: bidder is less < 30 (instance {{ $labels.instance }})
         description: "bidder is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: budgets failures<100
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: budgets items<100
+      expr: 'last_over_time(items{service="budgets"}[10m]) < 100'
       for: 30m
       labels:
         severity: warning
@@ -85,8 +85,8 @@ groups:
         summary: budgets is less < 30 (instance {{ $labels.instance }})
         description: "budgets is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
   
-    - alert: campaigns failures< 100
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: campaigns items< 100
+      expr: 'last_over_time(items{service="campaigns"}[10m]) < 100'
       for: 30m
       labels:
         severity: warning
@@ -94,8 +94,8 @@ groups:
         summary: campaigns is less < 100 (instance {{ $labels.instance }})
         description: "campaigns is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: campaigns_expenses failures<10000
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: campaigns_expenses items<10000
+      expr: 'last_over_time(items{service="campaigns_expenses"}[10m]) < 10000'
       for: 30m
       labels:
         severity: warning
@@ -103,8 +103,8 @@ groups:
         summary: campaigns_expenses is less < 10000 (instance {{ $labels.instance }})
         description: "campaigns_expenses is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: feedbacks_uploader failures<1
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: feedbacks_uploader items<1
+      expr: 'last_over_time(items{service="feedbacks_uploader"}[10m]) < 1'
       for: 2h
       labels:
         severity: warning
@@ -112,8 +112,8 @@ groups:
         summary: feedbacks_uploader is less < 1 (instance {{ $labels.instance }})
         description: "feedbacks_uploader is less < 1\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: orders_scrapper failures<10000
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: orders_scrapper items<10000
+      expr: 'last_over_time(items{service="orders_scrapper"}[10m]) < 10000'
       for: 30m
       labels:
         severity: warning
@@ -121,8 +121,8 @@ groups:
         summary: orders_scrapper is less < 10000 (instance {{ $labels.instance }})
         description: "orders_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: stocks_scrapper failures<10000
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
+    - alert: stocks_scrapper items<10000
+      expr: 'last_over_time(items{service="stocks_scrapper"}[10m]) < 10000'
       for: 30m
       labels:
         severity: warning
@@ -130,17 +130,8 @@ groups:
         summary: stocks_scrapper is less < 10000 (instance {{ $labels.instance }})
         description: "stocks_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
- - alert: add_phrases_presets errors >1
-      expr: 'increase(request_failures{service="bidder"}[1m]) < 1000'
-      for: 30m
-      labels:
-        severity: warning
-      annotations:
-        summary: add_phrases_presetshas errors < 10000 (instance {{ $labels.instance }})
-        description: "add_phrases_presets has errors < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-
-    - alert: ad_stats's errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+- alert: ad_stats's errors >1
+      expr: 'increase(errors{job="vps", service="ad_stats"}[1m]) > 1'
       for: 30m
       labels:
         severity: warning
@@ -149,7 +140,7 @@ groups:
         description: "ad_stats has errors < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: phrases_positons's errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+      expr: 'increase(errors{job="vps", service="phrases_positons"}[1m]) > 1'
       for: 6h
       labels:
         severity: warning
@@ -158,7 +149,7 @@ groups:
         description: "phrases_positons has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
   
     - alert: phrases_positons_full's errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+      expr: 'increase(errors{job="vps", service="phrases_positons_full"}[1m]) > 1'
       for: 6h
       labels:
         severity: warning
@@ -166,8 +157,8 @@ groups:
         summary: phrases_positons_full has errors (instance {{ $labels.instance }})
         description: "phrases_positons_full has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: positions's failures errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+    - alert: positions's items errors >1
+      expr: 'increase(errors{job="vps", service="positions"}[1m]) > 1'
       for: 6h
       labels:
         severity: warning
@@ -176,7 +167,7 @@ groups:
         description: "positions has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: remainders's errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+      expr: 'increase(errors{job="vps", service="remainders"}[1m]) > 1'
       for: 6h
       labels:
         severity: warning
@@ -185,7 +176,7 @@ groups:
         description: "remainders has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: seller's errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+      expr: 'increase(errors{job="vps", service="sellers"}[1m]) > 1'
       for: 6h
       labels:
         severity: warning
@@ -194,7 +185,7 @@ groups:
         description: "sellers has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: stat_words's errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+      expr: 'increase(errors{job="vps", service="stat_words"}[1m]) > 1'
       for: 30min
       labels:
         severity: warning
@@ -203,7 +194,7 @@ groups:
         description: "stat_words has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_api_service's errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+      expr: 'increase(errors{job="vps", service="wb_api_service"}[1m]) > 1'
       for: 30min
       labels:
         severity: warning
@@ -212,7 +203,7 @@ groups:
         description: "wb_api_service has errors < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_service's errors >1
-      expr: 'increase(request_failures{job="vps", service="phrases_positons"}[1m]) < 1000'
+      expr: 'increase(errors{job="vps", service="wb_service"}[1m]) > 1'
       for: 24h
       labels:
         severity: warning
