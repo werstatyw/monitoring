@@ -5,106 +5,106 @@ groups:
   rules:
 
     - alert: feedback scrapers memory usage increased
-      expr: 'increase(memory_usage{service="feedback scrapers", type="vms"}[1m]) > 1'
-      for: 1h
+      expr: rate((memory_usage{service="feedbacks_scrapper", type="vms"}[5m]))*100 > 100
+      for: 10m
       labels:
         severity: warning
       annotations:
-        summary: feedback scrapers memory usage increased on more than 100% (instance {{ $labels.instance }})
+        summary: feedback scrapers memory usage increased on more than 100% for 10 min (instance {{ $labels.instance }})
         description: "feedback scrapers memory usage increased on more than 100%  < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: accounts_products items<1300
-      expr:  'increase(memory_usage{service="accounts_products", type="vms"}[1m]) > 1'
-      for: 1h
+    - alert: accounts_products memory usage increase on 1000%
+      expr:  rate((memory_usage{service="accounts_products", type="vms"}[5m]))*100 > 1000
+      for: 5m
       labels:
         severity: warning
       annotations:
-        summary: accounts_products memory usage increased on more than 100% (instance {{ $labels.instance }})
-        description: "accounts_products memory usage increased on more than 100% \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: accounts_products memory usage increased on more than 1000% (instance {{ $labels.instance }})
+        description: "accounts_products memory usage increased on more than 1000% \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: adverts items<1000
-      expr: 'increase(memory_usage{service="adverts", type="vms"}[1m]) > 1'
-      for: 30m
+    - alert: adverts memory usage increased in 7 times
+      expr: rate((memory_usage{service="adverts", type="vms"}[5m]))*100 > 700
+      for: 0m
       labels:
         severity: warning
       annotations:
         summary: adverts is experience memory usage increase (instance {{ $labels.instance }})
         description: "adverts is experience memory usage increase\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: auctions_0 items<100000
-      expr: 'increase(memory_usage{service="auctions_0", type="vms"}[1m]) > 1'
-      for: 15m
+    - alert: auctions_0 mem usage is increased 7 times
+      expr: rate((memory_usage{service="auctions_0", type="vms"}[5m]))*100 > 700
+      for: 0m
       labels:
         severity: warning
       annotations:
-        summary: auctions_0 is less < 100000 (instance {{ $labels.instance }})
+        summary: auctions_0 mem usage increases 7 times(instance {{ $labels.instance }})
         description: "auctions_0 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: auctions_1 items<100000
-      expr: 'increase(memory_usage{service="auctions_1", type="vms"}[1m]) > 1'
-      for: 1h
+    - alert: auctions_1 mem usage increased more than 30 times
+      expr: rate((memory_usage{service="auctions_1", type="vms"}[5m]))*100 > 3000
+      for: 5min
       labels:
         severity: warning
       annotations:
-        summary: auctions_1 is less < 1000 (instance {{ $labels.instance }})
-        description: "auctions_1 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: auctions_1 mem usage increased more than 30 times (instance {{ $labels.instance }})
+        description: "auctions_1 mem usage increased more than 30 times\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: autopilot items<1000 for 24h
-      expr: 'increase(memory_usage{service="autopilot", type="vms"}[1m]) > 1'
+    - alert: autopilot mem usage icrease for 24h
+      expr: rate((memory_usage{service="autopilot", type="vms"}[5m]))*100 > 100
       for: 24h
       labels:
         severity: warning
       annotations:
-        summary: autopilot is less < 1000 (instance {{ $labels.instance }})
-        description: "autopilot is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: autopilot mem usage icrease for 24h twice (instance {{ $labels.instance }})
+        description: "autopilot mem usage icrease for 24h\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: balances items<30
-      expr: 'increase(memory_usage{service="balances", type="vms"}[1m]) > 1'
-      for: 30m
+    - alert: balances rate >35
+      expr: rate((memory_usage{service="balances", type="vms"}[1m]))*100 > 35
+      for: 5m
       labels:
         severity: warning
       annotations:
         summary: balances is less < 30 (instance {{ $labels.instance }})
         description: "balances is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: bidder items<30
-      expr: 'increase(memory_usage{service="bidder", type="vms"}[1m]) > 1'
+    - alert: bidder memory usage increase 10x
+      expr: rate((memory_usage{service="bidder", type="vms"}[1m]))*100 > 1000
       for: 30m
       labels:
         severity: warning
       annotations:
-        summary: bidder is less < 30 (instance {{ $labels.instance }})
-        description: "bidder is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: bidder memory usage increase 10x (instance {{ $labels.instance }})
+        description: "bidder memory usage increase 10x\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: budgets items<100
-      expr: 'increase(memory_usage{service="budgets", type="vms"}[1m]) > 1'
-      for: 30m
+    - alert: budgets mem usage 2x increase
+      expr: rate((memory_usage{service="budgets", type="vms"}[5m]))*100 > 200
+      for: 3m
       labels:
         severity: warning
       annotations:
-        summary: budgets is less < 30 (instance {{ $labels.instance }})
-        description: "budgets is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: budgets mem usage 2x increase(instance {{ $labels.instance }})
+        description: "budgets mem usage 2x increase\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
   
-    - alert: campaigns items< 100
-      expr: 'increase(memory_usage{service="campains", type="vms"}[1m]) > 1'
-      for: 30m
+    - alert: campaigns mem usage 30x increase 
+      expr: rate((memory_usage{service="campaigns", type="vms"}[10m]))*100 > 3000
+      for: 10m
       labels:
         severity: warning
       annotations:
-        summary: campaigns is less < 100 (instance {{ $labels.instance }})
-        description: "campaigns is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: campaigns mem usage 30x increase (instance {{ $labels.instance }})
+        description: "campaigns mem usage 30x increase\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: campaigns_expenses items<10000
-      expr: 'increase(memory_usage{service="campaigns_expenses", type="vms"}[1m]) > 1'
-      for: 30m
+    - alert: campaigns_expenses mem usage inc
+      expr: rate((memory_usage{service="campaigns_expenses", type="vms"}[10m]))*100 > 100
+      for: 2h
       labels:
         severity: warning
       annotations:
-        summary: campaigns_expenses is less < 10000 (instance {{ $labels.instance }})
-        description: "campaigns_expenses is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: campaigns_expenses mem usage increased (instance {{ $labels.instance }})
+        description: "campaigns_expenses mem usage increased \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: feedbacks_uploader items<1
-      expr: 'increase(memory_usage{service="feedbacks_uploader", type="vms"}[1m]) > 1'
+      expr: rate((memory_usage{service="feedbacks_uploader", type="vms"}[1m]))*100 > 35
       for: 2h
       labels:
         severity: warning
@@ -113,7 +113,7 @@ groups:
         description: "feedbacks_uploader is less < 1\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: orders_scrapper items<10000
-      expr: 'increase(memory_usage{service="orders_scrapper", type="vms"}[1m]) > 1'
+      expr: rate((memory_usage{service="orders_scrapper", type="vms"}[1h]))*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -122,7 +122,7 @@ groups:
         description: "orders_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: stocks_scrapper items<10000
-      expr: 'increase(memory_usage{service="stocks_scrapper", type="vms"}[1m]) > 1'
+      expr: rate((memory_usage{service="stocks_scrapper", type="vms"}[5m]))*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -131,7 +131,7 @@ groups:
         description: "stocks_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: ad_stats's errors >1
-      expr: 'increase(errors{job="vps", service="ad_stats"}[1m]) > 1'
+      expr: rate((memory_usage{service="ad_stats"}[5m]))*100 > 300
       for: 30m
       labels:
         severity: warning
@@ -140,8 +140,8 @@ groups:
         description: "ad_stats has errors < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: phrases_positons's errors >1
-      expr: 'increase(errors{job="vps", service="phrases_positons"}[1m]) > 1'
-      for: 6h
+      expr: rate((memory_usage{service="phrases_positions"}[5m]))*100 > 100
+      for: 0m
       labels:
         severity: warning
       annotations:
@@ -149,8 +149,8 @@ groups:
         description: "phrases_positons has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
   
     - alert: phrases_positons_full's errors >1
-      expr: 'increase(errors{job="vps", service="phrases_positons_full"}[1m]) > 1'
-      for: 6h
+      expr: rate((memory_usage{service="phrases_positions_full"}[1m]))*100 > 100
+      for: 5m
       labels:
         severity: warning
       annotations:
@@ -167,7 +167,7 @@ groups:
         description: "positions has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: remainders's errors >1
-      expr: 'increase(errors{job="vps", service="remainders"}[1m]) > 1'
+      expr: rate((memory_usage{service="remainders", type="vms"}[20m]))*100 > 2000
       for: 6h
       labels:
         severity: warning
@@ -185,7 +185,7 @@ groups:
         description: "sellers has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: stat_words's errors >1
-      expr: 'increase(errors{job="vps", service="stat_words"}[1m]) > 1'
+      expr: rate((memory_usage{service="stat_words", type="vms"}[20m]))*100 > 10000
       for: 30m
       labels:
         severity: warning
@@ -194,7 +194,7 @@ groups:
         description: "stat_words has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_api_service's errors >1
-      expr: 'increase(errors{job="vps", service="wb_api_service"}[1m]) > 1'
+      expr: rate((memory_usage{service="wb_api_service", type="vms"}[20m]))*100 > 400
       for: 30m
       labels:
         severity: warning
@@ -203,8 +203,8 @@ groups:
         description: "wb_api_service has errors < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_service's errors >1
-      expr: 'increase(errors{job="vps", service="wb_service"}[1m]) > 1'
-      for: 24h
+      expr: rate((memory_usage{service="wb_service", type="vms"}[5m]))*100 > 100
+      for: 1h
       labels:
         severity: warning
       annotations:

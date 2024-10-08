@@ -5,7 +5,7 @@ groups:
   rules:
 
     - alert: items<1000
-      expr: 'last_over_time(items{service="feedbacks_scrapper"}[10m]) < 1000'
+      expr: rate(request_latency_bucket{service="feedbacks_scrapper"}[10m])*100 > 1000
       for: 1h
       labels:
         severity: warning
@@ -14,8 +14,8 @@ groups:
         description: "feedback scrapers is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: accounts_products items<1300
-      expr: 'last_over_time(items{service="accounts_products"}[10m]) < 1300'
-      for: 1h
+      expr: rate(request_latency_bucket{service="accounts_products"}[10m])*100 > 1000
+      for: 5m
       labels:
         severity: warning
       annotations:
@@ -23,7 +23,7 @@ groups:
         description: "accounts_products is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: adverts items<1000
-      expr: 'last_over_time(items{service="adverts"}[10m]) < 1000'
+      expr: rate(request_latency_bucket{service="adverts"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -32,7 +32,7 @@ groups:
         description: "adverts is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: auctions_0 items<100000
-      expr: 'last_over_time(items{service="auctions_0"}[10m]) < 100000'
+      expr: rate(request_latency_bucket{service="auctions_0"}[10m])*100 > 1000
       for: 15m
       labels:
         severity: warning
@@ -41,7 +41,7 @@ groups:
         description: "auctions_0 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: auctions_1 items<100000
-      expr: 'last_over_time(items{service="auctions_1"}[10m]) < 100000'
+      expr: rate(request_latency_bucket{service="auctions_1"}[10m])*100 > 1000
       for: 1h
       labels:
         severity: warning
@@ -50,7 +50,7 @@ groups:
         description: "auctions_1 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: autopilot items<1000 for 24h
-      expr: 'last_over_time(items{service="autopilot"}[10m]) < 1000'
+      expr: rate(request_latency_bucket{service="autopilot"}[10m])*100 > 1000
       for: 24h
       labels:
         severity: warning
@@ -59,7 +59,7 @@ groups:
         description: "autopilot is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: balances items<30
-      expr: 'last_over_time(items{service="balances"}[10m]) < 30'
+      expr: rate(request_latency_bucket{service="balances"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -68,8 +68,8 @@ groups:
         description: "balances is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: bidder items<30
-      expr: 'last_over_time(items{service="bidder"}[10m]) < 300'
-      for: 30m
+      expr: rate(request_latency_bucket{service="bidder"}[10m])*100 > 1000
+      for: 5m
       labels:
         severity: warning
       annotations:
@@ -77,7 +77,7 @@ groups:
         description: "bidder is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: budgets items<100
-      expr: 'last_over_time(items{service="budgets"}[10m]) < 100'
+      expr: rate(request_latency_bucket{service="budget"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -86,7 +86,7 @@ groups:
         description: "budgets is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
   
     - alert: campaigns items< 100
-      expr: 'last_over_time(items{service="campaigns"}[10m]) < 100'
+      expr: rate(request_latency_bucket{service="campaingns"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -104,7 +104,7 @@ groups:
         description: "campaigns_expenses is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: feedbacks_uploader items<1
-      expr: 'last_over_time(items{service="feedbacks_uploader"}[10m]) < 1'
+      expr: rate(request_latency_bucket{service="feedbacks_uploader"}[10m])*100 > 1000
       for: 2h
       labels:
         severity: warning
@@ -113,7 +113,7 @@ groups:
         description: "feedbacks_uploader is less < 1\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: orders_scrapper items<10000
-      expr: 'last_over_time(items{service="orders_scrapper"}[10m]) < 10000'
+      expr: rate(request_latency_bucket{service="orders_scrapper"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -122,7 +122,7 @@ groups:
         description: "orders_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: stocks_scrapper items<10000
-      expr: 'last_over_time(items{service="stocks_scrapper"}[10m]) < 10000'
+      expr: rate(request_latency_bucket{service="stocks_scrapper"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -131,7 +131,7 @@ groups:
         description: "stocks_scrapper is less < 10000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: ad_stats's errors >1
-      expr: 'increase(errors{job="vps", service="ad_stats"}[1m]) > 1'
+      expr: rate(request_latency_bucket{service="ad_stats"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -140,8 +140,8 @@ groups:
         description: "ad_stats has errors < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: phrases_positons's errors >1
-      expr: 'increase(errors{job="vps", service="phrases_positons"}[1m]) > 1'
-      for: 6h
+      expr: rate(request_latency_bucket{service="phrases_postions"}[10m])*100 > 1000'
+      for: 1h
       labels:
         severity: warning
       annotations:
@@ -149,7 +149,7 @@ groups:
         description: "phrases_positons has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: phrases_positons_full's errors >1
-      expr: 'increase(errors{job="vps", service="phrases_positons_full"}[1m]) > 1'
+      expr: rate(request_latency_bucket{service="phrases_postions_full"}[10m])*100 > 1000'
       for: 6h
       labels:
         severity: warning
@@ -158,7 +158,7 @@ groups:
         description: "phrases_positons_full has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: positions's items errors >1
-      expr: 'increase(errors{job="vps", service="positions"}[1m]) > 1'
+      expr: rate(request_latency_bucket{service="positions"}[10m])*100 > 1000'
       for: 6h
       labels:
         severity: warning
@@ -167,7 +167,7 @@ groups:
         description: "positions has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: remainders's errors >1
-      expr: 'increase(errors{job="vps", service="remainders"}[1m]) > 1'
+      expr: rate(request_latency_bucket{service="remainders"}[10m])*100 > 1000'
       for: 6h
       labels:
         severity: warning
@@ -176,7 +176,7 @@ groups:
         description: "remainders has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: seller's errors >1
-      expr: 'increase(errors{job="vps", service="sellers"}[1m]) > 1'
+      expr: rate(request_latency_bucket{service="sellers"}[10m])*100 > 1000'
       for: 6h
       labels:
         severity: warning
@@ -185,7 +185,7 @@ groups:
         description: "sellers has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: stat_words's errors >1
-      expr: 'increase(errors{job="vps", service="stat_words"}[1m]) > 1'
+      expr: rate(request_latency_bucket{service="stats_words"}[10m])*100 > 1000'
       for: 30m
       labels:
         severity: warning
@@ -194,7 +194,7 @@ groups:
         description: "stat_words has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_api_service's errors >1
-      expr: 'increase(errors{job="vps", service="wb_api_service"}[1m]) > 1'
+      expr: rate(request_latency_bucket{service="wb_api_service"}[10m])*100 > 1000'
       for: 30m
       labels:
         severity: warning
@@ -203,7 +203,7 @@ groups:
         description: "wb_api_service has errors < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_service's errors >1
-      expr: 'increase(errors{job="vps", service="wb_service"}[1m]) > 1'
+      expr: rate(request_latency_bucket{service="wb_service"}[10m])*100 > 1000'
       for: 24h
       labels:
         severity: warning
