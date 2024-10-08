@@ -140,7 +140,7 @@ groups:
         description: "ad_stats has errors < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: phrases_positons's errors >1
-      expr: rate(request_latency_bucket{service="phrases_postions"}[10m])*100 > 1000'
+      expr: rate(request_latency_bucket{service="phrases_postions"}[10m])*100 > 1000
       for: 1h
       labels:
         severity: warning
@@ -149,7 +149,7 @@ groups:
         description: "phrases_positons has errors\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: phrases_positons_full's errors >1
-      expr: rate(request_latency_bucket{service="phrases_postions_full"}[10m])*100 > 1000'
+      expr: rate(request_latency_bucket{service="phrases_postions_full"}[10m])*100 > 1000
       for: 6h
       labels:
         severity: warning
@@ -158,7 +158,7 @@ groups:
         description: "phrases_positons_full has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: positions's items errors >1
-      expr: rate(request_latency_bucket{service="positions"}[10m])*100 > 1000'
+      expr: rate(request_latency_bucket{service="positions"}[10m])*100 > 1000
       for: 6h
       labels:
         severity: warning
@@ -167,7 +167,7 @@ groups:
         description: "positions has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: remainders's errors >1
-      expr: rate(request_latency_bucket{service="remainders"}[10m])*100 > 1000'
+      expr: rate(request_latency_bucket{service="remainders"}[10m])*100 > 1000
       for: 6h
       labels:
         severity: warning
@@ -176,7 +176,7 @@ groups:
         description: "remainders has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: seller's errors >1
-      expr: rate(request_latency_bucket{service="sellers"}[10m])*100 > 1000'
+      expr: rate(request_latency_bucket{service="sellers"}[10m])*100 > 1000
       for: 6h
       labels:
         severity: warning
@@ -185,7 +185,7 @@ groups:
         description: "sellers has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: stat_words's errors >1
-      expr: rate(request_latency_bucket{service="stats_words"}[10m])*100 > 1000'
+      expr: rate(request_latency_bucket{service="stats_words"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -194,7 +194,7 @@ groups:
         description: "stat_words has errors \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_api_service's errors >1
-      expr: rate(request_latency_bucket{service="wb_api_service"}[10m])*100 > 1000'
+      expr: rate(request_latency_bucket{service="wb_api_service"}[10m])*100 > 1000
       for: 30m
       labels:
         severity: warning
@@ -203,7 +203,7 @@ groups:
         description: "wb_api_service has errors < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_service's errors >1
-      expr: rate(request_latency_bucket{service="wb_service"}[10m])*100 > 1000'
+      expr: rate(request_latency_bucket{service="wb_service"}[10m])*100 > 1000
       for: 24h
       labels:
         severity: warning
