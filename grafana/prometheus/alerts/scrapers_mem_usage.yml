@@ -42,7 +42,7 @@ groups:
 
     - alert: auctions_1 mem usage increased more than 30 times
       expr: rate((memory_usage{service="auctions_1", type="vms"}[5m]))*100 > 3000
-      for: 5min
+      for: 5m
       labels:
         severity: warning
       annotations:
