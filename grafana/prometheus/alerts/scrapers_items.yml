@@ -222,10 +222,10 @@ groups:
         description: "wb_api_service is less < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: wb_service's items<20000
-      expr: 'last_over_time(items{job="vps", service="wb_service"}[10m]) < 20000'
+      expr: 'last_over_time(items{job="vps", service="wb_service"}[13m]) < 5557'
       for: 24h
       labels:
         severity: warning
       annotations:
-        summary: wb_service is less < 20000 (instance {{ $labels.instance }})
-        description: "wb_service is less < 2000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: wb_service is less < 5557 (instance {{ $labels.instance }})
+        description: "wb_service is less < 5557\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"

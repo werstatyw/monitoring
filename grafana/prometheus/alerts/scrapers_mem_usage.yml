@@ -31,14 +31,14 @@ groups:
         summary: adverts is experience memory usage increase (instance {{ $labels.instance }})
         description: "adverts is experience memory usage increase\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
-    - alert: auctions_0 mem usage is increased 7 times
-      expr: rate((memory_usage{service="auctions_0", type="vms"}[5m]))*100 > 700
+    - alert: auctions_0 mem usage is increased 50 times
+      expr: rate((memory_usage{service="auctions_0", type="vms"}[5m]))*100 > 5557
       for: 0m
       labels:
         severity: warning
       annotations:
-        summary: auctions_0 mem usage increases 7 times(instance {{ $labels.instance }})
-        description: "auctions_0 is less < 1000\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: auctions_0 mem usage increases 50 times(instance {{ $labels.instance }})
+        description: "auctions_0 mem usage\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: auctions_1 mem usage increased more than 30 times
       expr: rate((memory_usage{service="auctions_1", type="vms"}[5m]))*100 > 3000
