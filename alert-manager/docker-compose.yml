@@ -4,7 +4,7 @@ services:
   alert-manager:
       image: prom/alertmanager
       volumes:
-       - "./alertmanager.yml:/alertmanager/alertmanager.yml"
+        - ./alertmanager.yml:/alertmanager/alertmanager.yml
       # networks:
       #   - localprom
       ports:
